@@ -5,6 +5,7 @@
 #include "2021/Day3Solver.hpp"
 
 #include "2024/Day1Solver.hpp"
+#include "2024/Day2Solver.hpp"
 
 #include <string.h>
 #include <cstdio>
@@ -18,15 +19,15 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *solve
   {
     if (strcmp(solver_class, "Day1Solver") == 0)
     {
-      solver = std::shared_ptr<ISolver>(new YEAR_2021::DAY_1::Day1Solver());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_1::Day1Solver>());
     }
     else if (strcmp(solver_class, "Day2Solver") == 0)
     {
-      solver = std::shared_ptr<ISolver>(new YEAR_2021::DAY_2::Day2Solver());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_2::Day2Solver>());
     }
     else if (strcmp(solver_class, "Day3Solver") == 0)
     {
-      solver = std::shared_ptr<ISolver>(new YEAR_2021::DAY_3::Day3Solver());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_3::Day3Solver>());
     }
     else
     {
@@ -38,7 +39,11 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *solve
   {
     if (strcmp(solver_class, "Day1Solver") == 0)
     {
-      solver = std::shared_ptr<ISolver>(new YEAR_2024::DAY_1::Day1Solver());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_1::Day1Solver>());
+    }
+    if (strcmp(solver_class, "Day1Solver") == 0)
+    {
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_2::Day2Solver>());
     }
     else
     {

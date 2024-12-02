@@ -41,7 +41,7 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *solve
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_1::Day1Solver>());
     }
-    if (strcmp(solver_class, "Day1Solver") == 0)
+    if (strcmp(solver_class, "Day2Solver") == 0)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_2::Day2Solver>());
     }

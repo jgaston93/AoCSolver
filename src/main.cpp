@@ -40,8 +40,11 @@ int main(int argc, char **argv)
   // Initialize and run solver
   std::shared_ptr<ISolver> solver = SolverFactory::createSolver(year, solver_class);
 
-  solver->initialize(input_file);
-  solver->run();
+  if (solver != nullptr)
+  {
+    solver->initialize(input_file);
+    solver->run();
+  }
 
   return 0;
 }

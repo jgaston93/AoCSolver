@@ -41,11 +41,26 @@ namespace YEAR_2024::DAY_2
 
       for (int i = 0; i < m_report_count; i++)
       {
+        for (int j = 0; j < m_report_lengths[i]; j++)
+        {
+          // printf("%d\t", m_reports[i][j]);
+        }
+        // printf("\n");
         for (int j = 0; j < m_report_lengths[i] - 1; j++)
         {
-          printf("%d ", m_reports[i][j] - m_reports[i][j + 1]);
+          int delta = m_reports[i][j + 1] - m_reports[i][j];
+          m_velocities[i][j] = delta;
+          // printf("%d\t", delta);
         }
-        printf("\n");
+        // printf("\n");
+        for (int j = 0; j < m_report_lengths[i] - 2; j++)
+        {
+          int delta_dot = m_velocities[i][j + 1] - m_velocities[i][j];
+          m_accelerations[i][j] = delta_dot;
+          // printf("%d\t", delta_dot);
+        }
+        // printf("\n");
+        // printf("\n");
       }
     }
   }
@@ -53,26 +68,71 @@ namespace YEAR_2024::DAY_2
   void Day2Solver::run() const
   {
     int safe_report_count = 0;
+    int dampened_report_count = 0;
 
     for (int i = 0; i < m_report_count; i++)
     {
       bool report_safe = true;
-      int difference = m_reports[i][0] - m_reports[i][1];
+
+      int difference = m_velocities[i][0];
       if (difference == 0)
         report_safe = false;
-      bool decreasing = difference > 0;
+
+      bool decreasing = difference < 0;
       for (int j = 0; j < m_report_lengths[i] - 1 && report_safe; j++)
       {
-        difference = m_reports[i][j] - m_reports[i][j + 1];
-        if (difference == 0 || (decreasing && difference < 0) || (!decreasing && difference > 0) || abs(difference) > 3)
+        difference = m_reports[i][j + 1] - m_reports[i][j];
+        if (difference == 0 || (decreasing && difference > 0) || (!decreasing && difference < 0) || abs(difference) > 3)
           report_safe = false;
       }
 
       if (report_safe)
+      {
+        dampened_report_count++;
         safe_report_count++;
+      }
+      else
+      {
+        int index = 0;
+
+        while (index < m_report_lengths[i] && !report_safe)
+        {
+          int new_report[MAX_REPORT_LENGTH] = {0};
+          for (int j = 0; j < m_report_lengths[i]; j++)
+          {
+            if (j < index)
+            {
+              new_report[j] = m_reports[i][j];
+            }
+            else if (j > index)
+            {
+              new_report[j - 1] = m_reports[i][j];
+            }
+          }
+
+          report_safe = true;
+
+          difference = new_report[1] - new_report[0];
+          if (difference == 0)
+            report_safe = false;
+
+          decreasing = difference < 0;
+          for (int j = 0; j < m_report_lengths[i] - 2 && report_safe; j++)
+          {
+            difference = new_report[j + 1] - new_report[j];
+            if (difference == 0 || (decreasing && difference > 0) || (!decreasing && difference < 0) || abs(difference) > 3)
+              report_safe = false;
+          }
+
+          index++;
+        }
+
+        if (report_safe)
+          dampened_report_count++;
+      }
     }
     printf("Part 1 = %d\n", safe_report_count);
-    // printf("Part 2 = %d\n", similarity_score);
+    printf("Part 2 = %d\n", dampened_report_count);
   }
 
 } // namespace YEAR_2024::DAY_1

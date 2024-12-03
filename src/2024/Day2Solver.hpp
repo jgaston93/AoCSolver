@@ -15,6 +15,8 @@ namespace YEAR_2024::DAY_2
 
   private:
     int m_reports[MAX_REPORT_COUNT][MAX_REPORT_LENGTH] = {0};
+    int m_velocities[MAX_REPORT_COUNT][MAX_REPORT_LENGTH] = {0};
+    int m_accelerations[MAX_REPORT_COUNT][MAX_REPORT_LENGTH] = {0};
     int m_report_lengths[MAX_REPORT_COUNT] = {0};
     int m_report_count = 0;
   };

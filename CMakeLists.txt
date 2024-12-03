@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1...3.29)
+cmake_minimum_required(VERSION 3.1...3.30)
 
 project(AoCSolver VERSION 1.0 LANGUAGES CXX)
 

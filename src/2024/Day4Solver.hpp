@@ -13,7 +13,7 @@ namespace YEAR_2024::DAY_4
     void run() const final;
 
   private:
-    void search(int i, int j, const char *word) const;
+    int search(int row, int col, int num_filters, char filters[8][4][4], int *filter_widths, int *filter_heights) const;
 
     int m_puzzle_size = 0;
     char m_puzzle[MAX_PUZZLE_SIZE][MAX_PUZZLE_SIZE] = {0};

@@ -6,6 +6,11 @@ RUN apt-get update \
   && git clone https://github.com/jarro2783/cxxopts.git /usr/src/cxxopts \
   && cp -r /usr/src/json/single_include/nlohmann /usr/local/include \
   && cp /usr/src/cxxopts/include/cxxopts.hpp /usr/local/include \
-  && rm -r /usr/src/json \
-  && rm -r /usr/src/cxxopts
+  && adduser user
 WORKDIR /usr/src/app
+COPY . .
+RUN cmake -B build -S ./ \
+  && cmake --build build \
+  && chown -R user ./
+
+USER user

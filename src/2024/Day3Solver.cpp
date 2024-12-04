@@ -28,4 +28,4 @@ namespace YEAR_2024::DAY_3
     // printf("Part 2 = %d\n", dampened_report_count);
   }
 
-} // namespace YEAR_2024::DAY_1
+} // namespace YEAR_2024::DAY_3

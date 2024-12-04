@@ -1,3 +1,4 @@
 input_file.txt
 build/
 .vscode/
+.vscode-server/

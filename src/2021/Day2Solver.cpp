@@ -1,6 +1,6 @@
 #include "Day2Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 #include <string.h>
@@ -50,7 +50,7 @@ namespace YEAR_2021::DAY_2
     }
   }
 
-  void Day2Solver::run() const
+  void Day2Solver::run()
   {
     int x = 0;
     int y = 0;

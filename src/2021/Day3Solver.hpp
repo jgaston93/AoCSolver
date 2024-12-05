@@ -12,7 +12,7 @@ namespace YEAR_2021::DAY_3
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     int m_record_count = 0;

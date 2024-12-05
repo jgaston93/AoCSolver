@@ -1,6 +1,6 @@
 #include "Day1Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 
@@ -36,7 +36,7 @@ namespace YEAR_2021::DAY_1
     }
   }
 
-  void Day1Solver::run() const
+  void Day1Solver::run()
   {
     int window_size = 1;
     int part_1_final_report = scanReports(window_size);

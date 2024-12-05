@@ -11,7 +11,7 @@ namespace YEAR_2024::DAY_2
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     int m_reports[MAX_REPORT_COUNT][MAX_REPORT_LENGTH] = {0};

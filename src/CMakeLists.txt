@@ -3,7 +3,7 @@ add_subdirectory(2024)
 
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
-add_executable(AoCSolverMain main.cpp SolverFactory.cpp)
+add_executable(AoCSolverMain main.cpp SolverFactory.cpp AoCSolverCommon.cpp)
 
 target_include_directories(AoCSolverMain PRIVATE ${CMAKE_SOURCE_DIR}/src)
 

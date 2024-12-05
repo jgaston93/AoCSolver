@@ -25,7 +25,7 @@ namespace YEAR_2021::DAY_2
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     int m_command_count = 0;

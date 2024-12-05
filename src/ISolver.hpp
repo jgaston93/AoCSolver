@@ -6,7 +6,7 @@ class ISolver
 public:
   virtual ~ISolver() = default;
   virtual void initialize(const char *input_filename) = 0;
-  virtual void run() const = 0;
+  virtual void run() = 0;
 };
 
 #endif

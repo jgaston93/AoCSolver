@@ -1,6 +1,6 @@
 #include "Day3Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 
@@ -22,7 +22,7 @@ namespace YEAR_2024::DAY_3
     }
   }
 
-  void Day3Solver::run() const
+  void Day3Solver::run()
   {
     // printf("Part 1 = %d\n", safe_report_count);
     // printf("Part 2 = %d\n", dampened_report_count);

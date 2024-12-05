@@ -1,6 +1,6 @@
 #include "Day3Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 #include <string.h>
@@ -76,7 +76,7 @@ namespace YEAR_2021::DAY_3
     }
   }
 
-  void Day3Solver::run() const
+  void Day3Solver::run()
   {
     int record_counts[MAX_RECORD_WIDTH] = {0};
 

@@ -10,7 +10,7 @@ namespace YEAR_2024::DAY_4
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     int search(int row, int col, int num_filters, char filters[8][4][4], int *filter_widths, int *filter_heights) const;

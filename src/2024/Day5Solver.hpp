@@ -12,12 +12,15 @@ namespace YEAR_2024::DAY_5
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
-    int m_ordering_list_1[MAX_NUM_RULES] = {0};
-    int m_ordering_list_2[MAX_NUM_RULES] = {0};
+    bool compare(int a, int b);
+    int m_num_rules = 0;
+    int m_rules_list_1[MAX_NUM_RULES] = {0};
+    int m_rules_list_2[MAX_NUM_RULES] = {0};
 
+    int m_num_updates = 0;
     int m_updates[MAX_NUM_UPDATES][MAX_NUM_PAGES] = {0};
     int m_update_lengths[MAX_NUM_UPDATES] = {0};
   };

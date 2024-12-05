@@ -1,6 +1,6 @@
 #include "Day1Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 #include <math.h>
@@ -48,7 +48,7 @@ namespace YEAR_2024::DAY_1
     }
   }
 
-  void Day1Solver::run() const
+  void Day1Solver::run()
   {
     int difference_score = 0;
     int similarity_score = 0;

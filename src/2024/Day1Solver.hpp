@@ -10,7 +10,7 @@ namespace YEAR_2024::DAY_1
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     void CalculateScores(int &difference_score, int &similarity_score) const;

@@ -11,7 +11,7 @@ namespace YEAR_2021::DAY_1
   {
   public:
     void initialize(const char *input_filename) final;
-    void run() const final;
+    void run() final;
 
   private:
     int scanReports(int window_size) const;

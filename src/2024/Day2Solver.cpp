@@ -1,6 +1,6 @@
 #include "Day2Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 #include <math.h>
@@ -65,7 +65,7 @@ namespace YEAR_2024::DAY_2
     }
   }
 
-  void Day2Solver::run() const
+  void Day2Solver::run()
   {
     int safe_report_count = 0;
     int dampened_report_count = 0;

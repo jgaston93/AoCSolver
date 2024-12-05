@@ -1,6 +1,6 @@
 #include "Day4Solver.hpp"
 
-#include "AOCSolverCommon.hpp"
+#include "AoCSolverCommon.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -90,7 +90,7 @@ namespace YEAR_2024::DAY_4
     }
   }
 
-  void Day4Solver::run() const
+  void Day4Solver::run()
   {
     int words_found = 0;
     int xmas_found = 0;

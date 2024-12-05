@@ -3,14 +3,12 @@ RUN apt-get update \
   && apt-get -y install build-essential clang-format cmake gdb git  \
   && apt-get clean \
   && git clone https://github.com/nlohmann/json.git /usr/src/json \
-  && git clone https://github.com/jarro2783/cxxopts.git /usr/src/cxxopts \
-  && cp -r /usr/src/json/single_include/nlohmann /usr/local/include \
-  && cp /usr/src/cxxopts/include/cxxopts.hpp /usr/local/include \
-  && adduser user
-WORKDIR /usr/src/app
-COPY . .
+  && git clone https://github.com/jarro2783/cxxopts.git /usr/src/cxxopts
+WORKDIR /usr/src/json
 RUN cmake -B build -S ./ \
-  && cmake --build build \
-  && chown -R user ./
+  && cmake --build build --target install
+WORKDIR /usr/src/cxxopts
+RUN cmake -B build -S ./ \
+  && cmake --build build --target install
 
-USER user
+WORKDIR /usr/src/app

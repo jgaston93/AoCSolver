@@ -26,6 +26,22 @@ namespace YEAR_2024::DAY_5
         m_rules_list_1[m_num_rules] = a;
         m_rules_list_2[m_num_rules] = b;
         m_num_rules++;
+
+        bool a_found = false;
+        bool b_found = false;
+        for (int i = 0; i < m_mrl_size; i++)
+        {
+          if (m_master_rule_list[i] == a)
+            a_found = true;
+          if (m_master_rule_list[i] == b)
+            b_found = true;
+        }
+
+        if (!a_found)
+          m_master_rule_list[m_mrl_size++] = a;
+        if (!b_found && b != a)
+          m_master_rule_list[m_mrl_size++] = b;
+
         fgets(line, sizeof(line), fp);
         AOC_SOLVER_COMMON::StripNewlines(line);
       }
@@ -51,6 +67,15 @@ namespace YEAR_2024::DAY_5
 
   void Day5Solver::run()
   {
+
+    sort(m_master_rule_list, m_mrl_size);
+
+    for (int i = 0; i < m_mrl_size; i++)
+    {
+      printf("%d ", m_master_rule_list[i]);
+    }
+    printf("\n");
+
     int middle_page_number_sum = 0;
     int sorted_middle_page_number_sum = 0;
     for (int update_idx = 0; update_idx < m_num_updates; update_idx++)
@@ -62,18 +87,7 @@ namespace YEAR_2024::DAY_5
         arr[i] = m_updates[update_idx][i];
       }
 
-      for (int i = 1; i < n; ++i)
-      {
-        int key = arr[i];
-        int j = i - 1;
-
-        while (j >= 0 && compare(arr[j], key))
-        {
-          arr[j + 1] = arr[j];
-          j = j - 1;
-        }
-        arr[j + 1] = key;
-      }
+      sort(arr, m_update_lengths[update_idx]);
 
       bool sorted = true;
       for (int i = 0; i < m_update_lengths[update_idx] && sorted; i++)
@@ -92,6 +106,22 @@ namespace YEAR_2024::DAY_5
 
     printf("Part 1 = %d\n", middle_page_number_sum);
     printf("Part 2 = %d\n", sorted_middle_page_number_sum);
+  }
+
+  void Day5Solver::sort(int *arr, int size)
+  {
+    for (int i = 1; i < size; ++i)
+    {
+      int key = arr[i];
+      int j = i - 1;
+
+      while (j >= 0 && compare(arr[j], key))
+      {
+        arr[j + 1] = arr[j];
+        j = j - 1;
+      }
+      arr[j + 1] = key;
+    }
   }
 
   bool Day5Solver::compare(int a, int b)

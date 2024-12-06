@@ -16,9 +16,13 @@ namespace YEAR_2024::DAY_5
 
   private:
     bool compare(int a, int b);
+    void sort(int *arr, int size);
     int m_num_rules = 0;
     int m_rules_list_1[MAX_NUM_RULES] = {0};
     int m_rules_list_2[MAX_NUM_RULES] = {0};
+
+    int m_mrl_size = 0;
+    int m_master_rule_list[MAX_NUM_RULES * 2] = {0};
 
     int m_num_updates = 0;
     int m_updates[MAX_NUM_UPDATES][MAX_NUM_PAGES] = {0};

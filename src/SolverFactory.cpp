@@ -65,6 +65,7 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_6::Solver>());
     }
+    else
     {
       printf("Invalid Class Name\n");
     }

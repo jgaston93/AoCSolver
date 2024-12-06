@@ -7,7 +7,7 @@ namespace AOC_SOLVER_COMMON
     int index = 0;
     char c = str[index];
     bool newline_found = false;
-    while (newline_found && c != '\0')
+    while (!newline_found && c != '\0')
     {
       c = str[index];
       if (c == '\r' || c == '\n')

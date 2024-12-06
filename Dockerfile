@@ -12,3 +12,7 @@ RUN cmake -B build -S ./ \
   && cmake --build build --target install
 
 WORKDIR /usr/src/app
+RUN git clone https://github.com/jgaston93/AoCSolver.git \
+  && useradd -m user \
+  && chown -R user ./
+USER user

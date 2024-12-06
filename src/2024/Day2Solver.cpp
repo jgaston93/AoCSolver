@@ -8,7 +8,7 @@
 namespace YEAR_2024::DAY_2
 {
 
-  void Day2Solver::Initialize(const char *input_filename)
+  void Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -64,7 +64,7 @@ namespace YEAR_2024::DAY_2
     }
   }
 
-  void Day2Solver::Run()
+  void Solver::Run()
   {
     int safe_report_count = 0;
     int dampened_report_count = 0;

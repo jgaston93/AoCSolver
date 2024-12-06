@@ -7,7 +7,7 @@
 namespace YEAR_2024::DAY_5
 {
   void
-  Day5Solver::Initialize(const char *input_filename)
+  Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -64,7 +64,7 @@ namespace YEAR_2024::DAY_5
     }
   }
 
-  void Day5Solver::Run()
+  void Solver::Run()
   {
 
     Sort(m_master_rule_list, m_mrl_size);
@@ -107,7 +107,7 @@ namespace YEAR_2024::DAY_5
     SetPart2Answer(sorted_middle_page_number_sum);
   }
 
-  void Day5Solver::Sort(int *arr, int size)
+  void Solver::Sort(int *arr, int size)
   {
     for (int i = 1; i < size; ++i)
     {
@@ -123,7 +123,7 @@ namespace YEAR_2024::DAY_5
     }
   }
 
-  bool Day5Solver::Compare(int a, int b)
+  bool Solver::Compare(int a, int b)
   {
     bool rule_found = false;
     bool greater_than = false;

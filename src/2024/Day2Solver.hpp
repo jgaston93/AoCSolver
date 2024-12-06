@@ -7,7 +7,7 @@ namespace YEAR_2024::DAY_2
 {
   const int MAX_REPORT_COUNT = 1000;
   const int MAX_REPORT_LENGTH = 32;
-  class Day2Solver : public ISolver
+  class Solver : public ISolver
   {
   public:
     void Initialize(const char *input_filename) final;

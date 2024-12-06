@@ -8,7 +8,7 @@ namespace YEAR_2024::DAY_5
   const int MAX_NUM_RULES = 1176;
   const int MAX_NUM_UPDATES = 189;
   const int MAX_NUM_PAGES = 23;
-  class Day5Solver : public ISolver
+  class Solver : public ISolver
   {
   public:
     void Initialize(const char *input_filename) final;

@@ -22,9 +22,9 @@ int main(int argc, char **argv)
   auto configuration_data = nlohmann::json::parse(f);
 
   // Read configuration data
-  int year = configuration_data["year"];      // year of solver
-  char solver_class[MAX_STRING_LENGTH] = {0}; // day of solver
-  strcpy(solver_class, configuration_data["solver_class"].get<std::string>().data());
+  int year = configuration_data["year"]; // year of solver
+  char day[MAX_STRING_LENGTH] = {0};     // day of solver
+  strcpy(day, configuration_data["day"].get<std::string>().data());
   char input_file[MAX_STRING_LENGTH] = {0}; // input file for solver
 
   // Determine if using actual or sample input
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
   }
 
   // Initialize and Run solver
-  std::shared_ptr<ISolver> solver = SolverFactory::createSolver(year, solver_class);
+  std::shared_ptr<ISolver> solver = SolverFactory::createSolver(year, day);
 
   if (solver != nullptr)
   {

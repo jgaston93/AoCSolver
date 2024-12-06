@@ -62,7 +62,7 @@ namespace YEAR_2024::DAY_4
   const int part2_kernel_heights[] = {3, 3, 3, 3};
 
   void
-  Day4Solver::Initialize(const char *input_filename)
+  Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -89,7 +89,7 @@ namespace YEAR_2024::DAY_4
     }
   }
 
-  void Day4Solver::Run()
+  void Solver::Run()
   {
     int words_found = 0;
     int xmas_found = 0;
@@ -107,7 +107,7 @@ namespace YEAR_2024::DAY_4
     SetPart2Answer(xmas_found);
   }
 
-  int Day4Solver::Search(int row, int col, const int num_kernels, const char kernels[8][4][4], const int *kernel_widths, const int *kernel_heights) const
+  int Solver::Search(int row, int col, const int num_kernels, const char kernels[8][4][4], const int *kernel_widths, const int *kernel_heights) const
   {
     int count = 0;
     for (int i = 0; i < num_kernels; i++)

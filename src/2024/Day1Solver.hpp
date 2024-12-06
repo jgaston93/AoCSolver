@@ -6,7 +6,7 @@
 namespace YEAR_2024::DAY_1
 {
   const int MAX_LIST_SIZE = 1000;
-  class Day1Solver : public ISolver
+  class Solver : public ISolver
   {
   public:
     void Initialize(const char *input_filename) final;

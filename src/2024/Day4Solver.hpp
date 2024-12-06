@@ -6,7 +6,7 @@
 namespace YEAR_2024::DAY_4
 {
   const int MAX_PUZZLE_SIZE = 140;
-  class Day4Solver : public ISolver
+  class Solver : public ISolver
   {
   public:
     void Initialize(const char *input_filename) final;

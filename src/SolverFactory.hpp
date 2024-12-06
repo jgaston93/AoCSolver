@@ -8,7 +8,7 @@
 class SolverFactory
 {
 public:
-  static std::shared_ptr<ISolver> createSolver(int year, const char *solver_class);
+  static std::shared_ptr<ISolver> createSolver(int year, const char *day);
 };
 
 #endif

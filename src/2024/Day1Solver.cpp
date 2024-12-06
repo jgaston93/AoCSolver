@@ -7,7 +7,7 @@
 namespace YEAR_2024::DAY_1
 {
 
-  void Day1Solver::Initialize(const char *input_filename)
+  void Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -47,7 +47,7 @@ namespace YEAR_2024::DAY_1
     }
   }
 
-  void Day1Solver::Run()
+  void Solver::Run()
   {
     int difference_score = 0;
     int similarity_score = 0;
@@ -57,7 +57,7 @@ namespace YEAR_2024::DAY_1
     SetPart2Answer(similarity_score);
   }
 
-  void Day1Solver::InsertLocationId(int location_id, int &count, int *location_id_list) const
+  void Solver::InsertLocationId(int location_id, int &count, int *location_id_list) const
   {
     int insert_index = 0;
 
@@ -74,7 +74,7 @@ namespace YEAR_2024::DAY_1
     count++;
   }
 
-  void Day1Solver::CalculateScores(int &difference_score, int &similarity_score) const
+  void Solver::CalculateScores(int &difference_score, int &similarity_score) const
   {
     difference_score = 0;
     similarity_score = 0;

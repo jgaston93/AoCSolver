@@ -1,6 +1,6 @@
 {
   "year": 2024,
-  "solver_class": "Day5Solver",
+  "day": "Day5",
   "input_file": "configuration/2024/day5/input_file.txt",
   "sample_input_file": "configuration/2024/day5/sample_input_file.txt"
 }

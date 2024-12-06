@@ -9,26 +9,27 @@
 #include "2024/Day3Solver.hpp"
 #include "2024/Day4Solver.hpp"
 #include "2024/Day5Solver.hpp"
+#include "2024/Day6Solver.hpp"
 
 #include <string.h>
 #include <cstdio>
 
-std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *solver_class)
+std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
 {
   std::shared_ptr<ISolver> solver(nullptr);
   switch (year)
   {
   case 2021:
   {
-    if (strcmp(solver_class, "Day1Solver") == 0)
+    if (strcmp(day, "Day1Solver") == 0)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_1::Day1Solver>());
     }
-    else if (strcmp(solver_class, "Day2Solver") == 0)
+    else if (strcmp(day, "Day2Solver") == 0)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_2::Day2Solver>());
     }
-    else if (strcmp(solver_class, "Day3Solver") == 0)
+    else if (strcmp(day, "Day3Solver") == 0)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2021::DAY_3::Day3Solver>());
     }
@@ -40,27 +41,30 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *solve
   }
   case 2024:
   {
-    if (strcmp(solver_class, "Day1Solver") == 0)
+    if (strcmp(day, "Day1") == 0)
     {
-      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_1::Day1Solver>());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_1::Solver>());
     }
-    else if (strcmp(solver_class, "Day2Solver") == 0)
+    else if (strcmp(day, "Day2") == 0)
     {
-      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_2::Day2Solver>());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_2::Solver>());
     }
-    else if (strcmp(solver_class, "Day3Solver") == 0)
+    else if (strcmp(day, "Day3") == 0)
     {
-      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_3::Day3Solver>());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_3::Solver>());
     }
-    else if (strcmp(solver_class, "Day4Solver") == 0)
+    else if (strcmp(day, "Day4") == 0)
     {
-      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_4::Day4Solver>());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_4::Solver>());
     }
-    else if (strcmp(solver_class, "Day5Solver") == 0)
+    else if (strcmp(day, "Day5") == 0)
     {
-      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_5::Day5Solver>());
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_5::Solver>());
     }
-    else
+    else if (strcmp(day, "Day6") == 0)
+    {
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2024::DAY_6::Solver>());
+    }
     {
       printf("Invalid Class Name\n");
     }

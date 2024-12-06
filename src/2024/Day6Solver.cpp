@@ -1,8 +1,8 @@
-#include "Day3Solver.hpp"
+#include "Day6Solver.hpp"
 
 #include "AoCSolverCommon.hpp"
 
-namespace YEAR_2024::DAY_3
+namespace YEAR_2024::DAY_6
 {
 
   void Solver::Initialize(const char *input_filename)

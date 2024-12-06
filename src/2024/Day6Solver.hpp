@@ -1,9 +1,9 @@
-#ifndef YEAR_2024_DAY_3_SOLVER_HPP
-#define YEAR_2024_DAY_3_SOLVER_HPP
+#ifndef YEAR_2024_DAY_6_SOLVER_HPP
+#define YEAR_2024_DAY_6_SOLVER_HPP
 
 #include "ISolver.hpp"
 
-namespace YEAR_2024::DAY_3
+namespace YEAR_2024::DAY_6
 {
   class Solver : public ISolver
   {
@@ -13,6 +13,6 @@ namespace YEAR_2024::DAY_3
 
   private:
   };
-} // namespace YEAR_2024::DAY_3
+} // namespace YEAR_2024::DAY_6
 
 #endif

@@ -6,16 +6,6 @@
 
 namespace YEAR_2024::DAY_6
 {
-
-  enum class Direction
-  {
-    UP,
-    RIGHT,
-    DOWN,
-    LEFT,
-    NONE
-  };
-
   const int DIRECTIONS[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
   void
@@ -44,40 +34,77 @@ namespace YEAR_2024::DAY_6
 
   void Solver::Run()
   {
-    Direction guard_direction = Direction::NONE;
-    int guard_x = 0;
-    int guard_y = 0;
-    for (int i = 0; i < m_map_size && guard_direction == Direction::NONE; i++)
+    Direction start_direction = Direction::NONE;
+    int start_x = 0;
+    int start_y = 0;
+    for (int i = 0; i < m_map_size && start_direction == Direction::NONE; i++)
     {
-      for (int j = 0; j < m_map_size && guard_direction == Direction::NONE; j++)
+      for (int j = 0; j < m_map_size && start_direction == Direction::NONE; j++)
       {
         if (m_map[i][j] == '<')
         {
-          guard_direction = Direction::LEFT;
+          start_direction = Direction::LEFT;
         }
         else if (m_map[i][j] == '^')
         {
-          guard_direction = Direction::UP;
+          start_direction = Direction::UP;
         }
         else if (m_map[i][j] == '>')
         {
-          guard_direction = Direction::RIGHT;
+          start_direction = Direction::RIGHT;
         }
         else if (m_map[i][j] == 'v')
         {
-          guard_direction = Direction::DOWN;
+          start_direction = Direction::DOWN;
         }
 
-        if (guard_direction != Direction::NONE)
+        if (start_direction != Direction::NONE)
         {
-          guard_x = j;
-          guard_y = i;
+          start_x = j;
+          start_y = i;
         }
       }
     }
 
+    bool guard_visited[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
     bool guard_exited = false;
-    while (!guard_exited)
+    bool loop_found = false;
+    Walk(start_x, start_y, start_direction, guard_visited, guard_exited, loop_found);
+
+    int visit_count = 0;
+    int obstacle_count = 0;
+    for (int i = 0; i < m_map_size; i++)
+    {
+      for (int j = 0; j < m_map_size; j++)
+      {
+        if (guard_visited[i][j])
+        {
+          visit_count++;
+          m_map[i][j] = '#';
+          bool v[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
+          Walk(start_x, start_y, start_direction, v, guard_exited, loop_found);
+          if (loop_found)
+            obstacle_count++;
+          m_map[i][j] = '.';
+        }
+      }
+    }
+
+    SetPart1Answer(visit_count);
+    SetPart2Answer(obstacle_count);
+  }
+
+  void Solver::Walk(int start_x, int start_y, Direction start_direction, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool &guard_exited, bool &loop_found)
+  {
+    int guard_x = start_x;
+    int guard_y = start_y;
+    Direction guard_direction = start_direction;
+
+    Direction directions[MAX_MAP_SIZE][MAX_MAP_SIZE] = {static_cast<Direction>(4)};
+
+    guard_exited = false;
+    loop_found = false;
+    while (!guard_exited && !loop_found)
     {
       int next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
       int next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
@@ -86,7 +113,7 @@ namespace YEAR_2024::DAY_6
       {
         guard_exited = true;
       }
-      else if (m_map[next_y][next_x] == '#')
+      else if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
       {
         guard_direction = static_cast<Direction>(static_cast<int>(guard_direction) + 1);
         if (guard_direction == Direction::NONE)
@@ -94,36 +121,18 @@ namespace YEAR_2024::DAY_6
         next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
         next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
       }
-      else if (m_map[next_y][next_x] == 'X')
-      {
-        m_map[next_y][next_x] = 'O';
-      }
 
       if (!guard_exited)
       {
-        if (m_map[guard_y][guard_x] != 'O')
-          m_map[guard_y][guard_x] = 'X';
+        if (visited[guard_y][guard_x] && directions[guard_y][guard_x] == guard_direction)
+          loop_found = true;
+
+        visited[guard_y][guard_x] = true;
+        directions[guard_y][guard_x] = guard_direction;
         guard_x = next_x;
         guard_y = next_y;
       }
     }
-
-    int visit_count = 0;
-    int obstacle_count = 0;
-    for (int i = 0; i < m_map_size; i++)
-    {
-      for (int j = 0; j < m_map_size; j++)
-      {
-        printf("%c", m_map[i][j]);
-        if (m_map[i][j] == 'X' || m_map[i][j] == 'O')
-          visit_count++;
-        if (m_map[i][j] == 'O')
-          obstacle_count++;
-      }
-      printf("\n");
-    }
-    SetPart1Answer(visit_count);
-    SetPart2Answer(obstacle_count);
   }
 
 } // namespace YEAR_2024::DAY_3

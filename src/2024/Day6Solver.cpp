@@ -79,6 +79,7 @@ namespace YEAR_2024::DAY_6
       {
         if (guard_visited[i][j])
         {
+          printf("X");
           visit_count++;
           m_map[i][j] = '#';
           bool v[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
@@ -87,7 +88,12 @@ namespace YEAR_2024::DAY_6
             obstacle_count++;
           m_map[i][j] = '.';
         }
+        else
+        {
+          printf("%c", m_map[i][j]);
+        }
       }
+      printf("\n");
     }
 
     SetPart1Answer(visit_count);
@@ -109,11 +115,13 @@ namespace YEAR_2024::DAY_6
       int next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
       int next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
 
-      if (0 > guard_x || guard_x >= m_map_size || 0 > guard_y || guard_y >= m_map_size)
-      {
-        guard_exited = true;
-      }
-      else if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
+      if (visited[guard_y][guard_x] && directions[guard_y][guard_x] == guard_direction)
+        loop_found = true;
+
+      visited[guard_y][guard_x] = true;
+      directions[guard_y][guard_x] = guard_direction;
+
+      if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
       {
         guard_direction = static_cast<Direction>(static_cast<int>(guard_direction) + 1);
         if (guard_direction == Direction::NONE)
@@ -122,15 +130,11 @@ namespace YEAR_2024::DAY_6
         next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
       }
 
-      if (!guard_exited)
+      guard_x = next_x;
+      guard_y = next_y;
+      if (0 > guard_x || guard_x >= m_map_size || 0 > guard_y || guard_y >= m_map_size)
       {
-        if (visited[guard_y][guard_x] && directions[guard_y][guard_x] == guard_direction)
-          loop_found = true;
-
-        visited[guard_y][guard_x] = true;
-        directions[guard_y][guard_x] = guard_direction;
-        guard_x = next_x;
-        guard_y = next_y;
+        guard_exited = true;
       }
     }
   }

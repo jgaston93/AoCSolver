@@ -9,8 +9,8 @@ namespace YEAR_2024::DAY_1
   class Day1Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
     void CalculateScores(int &difference_score, int &similarity_score) const;

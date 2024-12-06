@@ -2,12 +2,10 @@
 
 #include "AoCSolverCommon.hpp"
 
-#include <cstdio>
-
 namespace YEAR_2024::DAY_3
 {
 
-  void Day3Solver::initialize(const char *input_filename)
+  void Day3Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -22,10 +20,8 @@ namespace YEAR_2024::DAY_3
     }
   }
 
-  void Day3Solver::run()
+  void Day3Solver::Run()
   {
-    // printf("Part 1 = %d\n", safe_report_count);
-    // printf("Part 2 = %d\n", dampened_report_count);
   }
 
 } // namespace YEAR_2024::DAY_3

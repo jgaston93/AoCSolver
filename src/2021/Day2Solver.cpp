@@ -29,7 +29,7 @@ namespace YEAR_2021::DAY_2
     return d;
   }
 
-  void Day2Solver::initialize(const char *input_filename)
+  void Day2Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -50,7 +50,7 @@ namespace YEAR_2021::DAY_2
     }
   }
 
-  void Day2Solver::run()
+  void Day2Solver::Run()
   {
     int x = 0;
     int y = 0;
@@ -78,7 +78,7 @@ namespace YEAR_2021::DAY_2
         }
         else
         {
-          printf("run: Invalid direction found\n");
+          printf("Run: Invalid direction found\n");
         }
 
         y += distance * direction;

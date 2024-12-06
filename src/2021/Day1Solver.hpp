@@ -10,13 +10,13 @@ namespace YEAR_2021::DAY_1
   class Day1Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
-    int scanReports(int window_size) const;
-    int report_count = 0;
-    int sweep_reports[MAX_SWEEP_COUNT] = {0};
+    int ScanReports(int window_size) const;
+    int m_report_count = 0;
+    int m_sweep_reports[MAX_SWEEP_COUNT] = {0};
   };
 } // namespace YEAR_2021::DAY_1
 

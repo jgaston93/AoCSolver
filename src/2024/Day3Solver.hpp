@@ -8,8 +8,8 @@ namespace YEAR_2024::DAY_3
   class Day3Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
   };

@@ -2,14 +2,13 @@
 
 #include "AoCSolverCommon.hpp"
 
-#include <cstdio>
 #include <cstring>
 
 namespace YEAR_2024::DAY_4
 {
 
-  int part1_num_kernels = 8;
-  char part1_kernels[8][4][4] = {
+  const int part1_num_kernels = 8;
+  const char part1_kernels[8][4][4] = {
       {{'X'},
        {'M'},
        {'A'},
@@ -38,11 +37,11 @@ namespace YEAR_2024::DAY_4
        {'X', '.', '.', '.'}},
   };
 
-  int part1_kernel_widths[] = {1, 1, 4, 4, 4, 4, 4, 4};
-  int part1_kernel_heights[] = {4, 4, 1, 1, 4, 4, 4, 4};
+  const int part1_kernel_widths[] = {1, 1, 4, 4, 4, 4, 4, 4};
+  const int part1_kernel_heights[] = {4, 4, 1, 1, 4, 4, 4, 4};
 
-  int part2_num_kernels = 4;
-  char part2_kernels[8][4][4] = {
+  const int part2_num_kernels = 4;
+  const char part2_kernels[8][4][4] = {
       {{'M', '.', 'S'},
        {'.', 'A', '.'},
        {'M', '.', 'S'}},
@@ -59,11 +58,11 @@ namespace YEAR_2024::DAY_4
        {'.', 'A', '.'},
        {'M', '.', 'M'}}};
 
-  int part2_kernel_widths[] = {3, 3, 3, 3};
-  int part2_kernel_heights[] = {3, 3, 3, 3};
+  const int part2_kernel_widths[] = {3, 3, 3, 3};
+  const int part2_kernel_heights[] = {3, 3, 3, 3};
 
   void
-  Day4Solver::initialize(const char *input_filename)
+  Day4Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -90,7 +89,7 @@ namespace YEAR_2024::DAY_4
     }
   }
 
-  void Day4Solver::run()
+  void Day4Solver::Run()
   {
     int words_found = 0;
     int xmas_found = 0;
@@ -98,17 +97,17 @@ namespace YEAR_2024::DAY_4
     {
       for (int j = 0; j < m_puzzle_size; j++)
       {
-        int count = search(i, j, part1_num_kernels, part1_kernels, part1_kernel_widths, part1_kernel_heights);
+        int count = Search(i, j, part1_num_kernels, part1_kernels, part1_kernel_widths, part1_kernel_heights);
         words_found += count;
-        count = search(i, j, part2_num_kernels, part2_kernels, part2_kernel_widths, part2_kernel_heights);
+        count = Search(i, j, part2_num_kernels, part2_kernels, part2_kernel_widths, part2_kernel_heights);
         xmas_found += count;
       }
     }
-    printf("Part 1 = %d\n", words_found);
-    printf("Part 2 = %d\n", xmas_found);
+    SetPart1Answer(words_found);
+    SetPart2Answer(xmas_found);
   }
 
-  int Day4Solver::search(int row, int col, int num_kernels, char kernels[8][4][4], int *kernel_widths, int *kernel_heights) const
+  int Day4Solver::Search(int row, int col, const int num_kernels, const char kernels[8][4][4], const int *kernel_widths, const int *kernel_heights) const
   {
     int count = 0;
     for (int i = 0; i < num_kernels; i++)

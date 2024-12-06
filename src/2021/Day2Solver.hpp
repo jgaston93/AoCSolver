@@ -24,8 +24,8 @@ namespace YEAR_2021::DAY_2
   class Day2Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
     int m_command_count = 0;

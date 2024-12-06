@@ -17,7 +17,7 @@ namespace YEAR_2021::DAY_1
     return sum;
   }
 
-  void Day1Solver::initialize(const char *input_filename)
+  void Day1Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -30,38 +30,38 @@ namespace YEAR_2021::DAY_1
         fgets(line, sizeof(line), fp);
         int report = 0;
         sscanf(line, "%d", &report);
-        sweep_reports[report_count++] = report;
+        m_sweep_reports[m_report_count++] = report;
       }
       fclose(fp);
     }
   }
 
-  void Day1Solver::run()
+  void Day1Solver::Run()
   {
     int window_size = 1;
-    int part_1_final_report = scanReports(window_size);
+    int part_1_final_report = ScanReports(window_size);
     window_size = 3;
-    int part_2_final_report = scanReports(window_size);
+    int part_2_final_report = ScanReports(window_size);
 
     printf("Part 1 = %d\n", part_1_final_report);
     printf("Part 2 = %d\n", part_2_final_report);
   }
 
-  int Day1Solver::scanReports(int window_size) const
+  int Day1Solver::ScanReports(int window_size) const
   {
-    int previous_report = sum_reports(&(sweep_reports[0]), window_size);
+    int previous_report = sum_reports(&(m_sweep_reports[0]), window_size);
     int increase_count = 0;
     bool end_reached = false;
-    for (int i = 0; i < report_count && !end_reached; i++)
+    for (int i = 0; i < m_report_count && !end_reached; i++)
     {
-      if (i + window_size > report_count)
+      if (i + window_size > m_report_count)
       {
         end_reached = true;
       }
 
       if (!end_reached)
       {
-        int sum = sum_reports(&(sweep_reports[i]), window_size);
+        int sum = sum_reports(&(m_sweep_reports[i]), window_size);
         if (sum > previous_report)
         {
           increase_count++;

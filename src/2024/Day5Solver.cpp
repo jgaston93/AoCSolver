@@ -2,13 +2,12 @@
 
 #include "AoCSolverCommon.hpp"
 
-#include <cstdio>
 #include <cstring>
 
 namespace YEAR_2024::DAY_5
 {
   void
-  Day5Solver::initialize(const char *input_filename)
+  Day5Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -65,10 +64,10 @@ namespace YEAR_2024::DAY_5
     }
   }
 
-  void Day5Solver::run()
+  void Day5Solver::Run()
   {
 
-    sort(m_master_rule_list, m_mrl_size);
+    Sort(m_master_rule_list, m_mrl_size);
 
     for (int i = 0; i < m_mrl_size; i++)
     {
@@ -87,7 +86,7 @@ namespace YEAR_2024::DAY_5
         arr[i] = m_updates[update_idx][i];
       }
 
-      sort(arr, m_update_lengths[update_idx]);
+      Sort(arr, m_update_lengths[update_idx]);
 
       bool sorted = true;
       for (int i = 0; i < m_update_lengths[update_idx] && sorted; i++)
@@ -104,18 +103,18 @@ namespace YEAR_2024::DAY_5
         sorted_middle_page_number_sum += mid_val;
     }
 
-    printf("Part 1 = %d\n", middle_page_number_sum);
-    printf("Part 2 = %d\n", sorted_middle_page_number_sum);
+    SetPart1Answer(middle_page_number_sum);
+    SetPart2Answer(sorted_middle_page_number_sum);
   }
 
-  void Day5Solver::sort(int *arr, int size)
+  void Day5Solver::Sort(int *arr, int size)
   {
     for (int i = 1; i < size; ++i)
     {
       int key = arr[i];
       int j = i - 1;
 
-      while (j >= 0 && compare(arr[j], key))
+      while (j >= 0 && Compare(arr[j], key))
       {
         arr[j + 1] = arr[j];
         j = j - 1;
@@ -124,7 +123,7 @@ namespace YEAR_2024::DAY_5
     }
   }
 
-  bool Day5Solver::compare(int a, int b)
+  bool Day5Solver::Compare(int a, int b)
   {
     bool rule_found = false;
     bool greater_than = false;

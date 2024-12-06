@@ -2,13 +2,12 @@
 
 #include "AoCSolverCommon.hpp"
 
-#include <cstdio>
 #include <math.h>
 
 namespace YEAR_2024::DAY_1
 {
 
-  void Day1Solver::initialize(const char *input_filename)
+  void Day1Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -48,13 +47,14 @@ namespace YEAR_2024::DAY_1
     }
   }
 
-  void Day1Solver::run()
+  void Day1Solver::Run()
   {
     int difference_score = 0;
     int similarity_score = 0;
     CalculateScores(difference_score, similarity_score);
-    printf("Part 1 = %d\n", difference_score);
-    printf("Part 2 = %d\n", similarity_score);
+
+    SetPart1Answer(difference_score);
+    SetPart2Answer(similarity_score);
   }
 
   void Day1Solver::InsertLocationId(int location_id, int &count, int *location_id_list) const

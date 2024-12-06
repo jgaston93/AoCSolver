@@ -31,7 +31,7 @@ namespace YEAR_2021::DAY_3
     }
   }
 
-  void Day3Solver::initialize(const char *input_filename)
+  void Day3Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -76,7 +76,7 @@ namespace YEAR_2021::DAY_3
     }
   }
 
-  void Day3Solver::run()
+  void Day3Solver::Run()
   {
     int record_counts[MAX_RECORD_WIDTH] = {0};
 

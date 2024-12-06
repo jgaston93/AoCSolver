@@ -10,8 +10,8 @@ namespace YEAR_2024::DAY_2
   class Day2Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
     int m_reports[MAX_REPORT_COUNT][MAX_REPORT_LENGTH] = {0};

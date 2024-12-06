@@ -2,14 +2,13 @@
 
 #include "AoCSolverCommon.hpp"
 
-#include <cstdio>
 #include <math.h>
 #include <string.h>
 
 namespace YEAR_2024::DAY_2
 {
 
-  void Day2Solver::initialize(const char *input_filename)
+  void Day2Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");
 
@@ -65,7 +64,7 @@ namespace YEAR_2024::DAY_2
     }
   }
 
-  void Day2Solver::run()
+  void Day2Solver::Run()
   {
     int safe_report_count = 0;
     int dampened_report_count = 0;
@@ -131,8 +130,8 @@ namespace YEAR_2024::DAY_2
           dampened_report_count++;
       }
     }
-    printf("Part 1 = %d\n", safe_report_count);
-    printf("Part 2 = %d\n", dampened_report_count);
+    SetPart1Answer(safe_report_count);
+    SetPart2Answer(dampened_report_count);
   }
 
 } // namespace YEAR_2024::DAY_2

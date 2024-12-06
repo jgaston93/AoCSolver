@@ -37,13 +37,14 @@ int main(int argc, char **argv)
     strcpy(input_file, configuration_data["input_file"].get<std::string>().data());
   }
 
-  // Initialize and run solver
+  // Initialize and Run solver
   std::shared_ptr<ISolver> solver = SolverFactory::createSolver(year, solver_class);
 
   if (solver != nullptr)
   {
-    solver->initialize(input_file);
-    solver->run();
+    solver->Initialize(input_file);
+    solver->Run();
+    solver->PrintAnswer();
   }
 
   return 0;

@@ -9,11 +9,11 @@ namespace YEAR_2024::DAY_4
   class Day4Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
-    int search(int row, int col, int num_filters, char filters[8][4][4], int *filter_widths, int *filter_heights) const;
+    int Search(int row, int col, const int num_filters, const char filters[8][4][4], const int *filter_widths, const int *filter_heights) const;
 
     int m_puzzle_size = 0;
     char m_puzzle[MAX_PUZZLE_SIZE][MAX_PUZZLE_SIZE] = {0};

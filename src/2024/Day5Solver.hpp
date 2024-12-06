@@ -11,12 +11,12 @@ namespace YEAR_2024::DAY_5
   class Day5Solver : public ISolver
   {
   public:
-    void initialize(const char *input_filename) final;
-    void run() final;
+    void Initialize(const char *input_filename) final;
+    void Run() final;
 
   private:
-    bool compare(int a, int b);
-    void sort(int *arr, int size);
+    bool Compare(int a, int b);
+    void Sort(int *arr, int size);
     int m_num_rules = 0;
     int m_rules_list_1[MAX_NUM_RULES] = {0};
     int m_rules_list_2[MAX_NUM_RULES] = {0};

@@ -82,7 +82,7 @@ namespace YEAR_2024::DAY_6
           printf("X");
           visit_count++;
 
-          if (m_map[i][j] != '^')
+          if (m_map[i][j] == '.')
           {
             m_map[i][j] = '#';
             bool v[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};

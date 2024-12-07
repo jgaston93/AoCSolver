@@ -5,8 +5,17 @@
 
 namespace YEAR_2024::DAY_7
 {
+
+  using uint64_t = unsigned long long;
+  enum class Operator
+  {
+    ADDITION,
+    MULTIPLICATION,
+    CONCATENATION
+  };
+
   const int MAX_NUM_EQUATIONS = 850;
-  const int MAX_EQ_VALUES = 32;
+  const int MAX_NUM_TERMS = 32;
 
   class Solver : public ISolver
   {
@@ -15,10 +24,10 @@ namespace YEAR_2024::DAY_7
     void Run() final;
 
   private:
-    unsigned int m_num_equations = 0;
-    unsigned int m_test_values[MAX_NUM_EQUATIONS] = {0};
-    unsigned int m_eq_values[MAX_NUM_EQUATIONS][MAX_EQ_VALUES] = {0};
-    unsigned int m_eq_value_counts[MAX_NUM_EQUATIONS] = {0};
+    int m_num_equations = 0;
+    uint64_t m_test_values[MAX_NUM_EQUATIONS] = {0};
+    uint64_t m_terms[MAX_NUM_EQUATIONS][MAX_NUM_TERMS] = {0};
+    int m_num_terms[MAX_NUM_EQUATIONS] = {0};
   };
 } // namespace YEAR_2024::DAY_7
 

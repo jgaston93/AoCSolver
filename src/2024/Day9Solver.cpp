@@ -12,11 +12,20 @@ namespace YEAR_2024::DAY_9
     if (fp != nullptr)
     {
       char line[AOC_SOLVER_COMMON::MAX_LINE_LENGTH] = {0};
+      bool file_data = true;
+      unsigned int file_count = 0;
       while (!feof(fp))
       {
-        fgets(line, sizeof(line), fp);
+        char c = fgetc(fp);
+
+        if (file_data)
+          file_count++;
+
+        file_data = !file_data;
       }
       fclose(fp);
+
+      printf("Max file count: %u\n", file_count);
     }
   }
 

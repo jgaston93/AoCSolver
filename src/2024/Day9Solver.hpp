@@ -6,6 +6,12 @@
 namespace YEAR_2024::DAY_9
 {
   const int MAX_FILE_COUNT = 10000;
+  struct Node
+  {
+    unsigned int file_id = 0;
+    Node *next_node = nullptr;
+  };
+
   class Solver : public ISolver
   {
 
@@ -14,7 +20,11 @@ namespace YEAR_2024::DAY_9
     void Run() final;
 
   private:
-    int m_files[MAX_FILE_COUNT] = {0};
+    unsigned int m_file_count = 0;
+    unsigned int m_id[MAX_FILE_COUNT] = {0};
+    unsigned int m_size[MAX_FILE_COUNT] = {0};
+    unsigned int m_space[MAX_FILE_COUNT] = {0};
+    unsigned int m_position[MAX_FILE_COUNT] = {0};
   };
 } // namespace YEAR_2024::DAY_9
 

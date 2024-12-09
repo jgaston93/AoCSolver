@@ -23,6 +23,35 @@ namespace YEAR_2024::DAY_7
     return result;
   }
 
+  bool Evaluate(uint64_t test_value, uint64_t result, int operator_index, int num_terms, const uint64_t *terms, Operator operation)
+  {
+    bool solution_found = false;
+
+    if (operation == Operator::ADDITION)
+    {
+      result += terms[operator_index];
+    }
+    else if (operation == Operator::MULTIPLICATION)
+    {
+      result *= terms[operator_index];
+    }
+
+    int remaining_operations = (num_terms - 1) - (operator_index + 1);
+
+    if (remaining_operations == 0 && result == test_value)
+      solution_found = true;
+    else if (remaining_operations > 0 && result < test_value)
+    {
+      bool addition_solution_found = Evaluate(test_value, result, operator_index + 1, num_terms, terms, Operator::ADDITION);
+      bool multiplication_solution_found = Evaluate(test_value, result, operator_index + 1, num_terms, terms, Operator::MULTIPLICATION);
+
+      if (addition_solution_found || multiplication_solution_found)
+        solution_found = true;
+    }
+
+    return solution_found;
+  }
+
   uint64_t Evaluate(int num_terms, const uint64_t *terms, const Operator *operators)
   {
     uint64_t t[MAX_NUM_TERMS] = {0};
@@ -41,6 +70,11 @@ namespace YEAR_2024::DAY_7
       {
         t[num_t++] = terms[i];
       }
+    }
+
+    if (operators[num_terms - 2] != Operator::CONCATENATION)
+    {
+      t[num_t++] = terms[num_terms - 1];
     }
 
     uint64_t result = t[0];
@@ -92,17 +126,6 @@ namespace YEAR_2024::DAY_7
         m_num_equations++;
       }
       fclose(fp);
-
-      for (int i = 0; i < m_num_equations; i++)
-      {
-        printf("%llu: ", m_test_values[i]);
-
-        for (int j = 0; j < m_num_terms[i]; j++)
-        {
-          printf("%llu ", m_terms[i][j]);
-        }
-        printf("\n");
-      }
     }
   }
 
@@ -111,26 +134,22 @@ namespace YEAR_2024::DAY_7
     uint64_t test_value_sum = 0;
     for (int i = 0; i < m_num_equations; i++)
     {
-      Operator operators[MAX_NUM_TERMS] = {static_cast<Operator>(0)};
-      bool equation_solved = false;
-      for (uint64_t j = 0; j < pow(2, m_num_terms[i] - 1) && !equation_solved; j++)
-      {
-        for (int k = 0; k < m_num_terms[i] - 1; k++)
-        {
-          uint64_t op = (j >> k) & 0x1;
-          operators[k] = static_cast<Operator>(op);
-        }
+      bool addition_equation_solved = Evaluate(m_test_values[i], m_terms[i][0], 1, m_num_terms[i], &m_terms[i][0], Operator::ADDITION);
+      bool multiplication_equation_solved = Evaluate(m_test_values[i], m_terms[i][0], 1, m_num_terms[i], &m_terms[i][0], Operator::MULTIPLICATION);
 
-        uint64_t result = Evaluate(m_num_terms[i], m_terms[i], operators);
-        if (result == m_test_values[i])
-          equation_solved = true;
-      }
-
-      if (equation_solved)
+      if (addition_equation_solved || multiplication_equation_solved)
         test_value_sum += m_test_values[i];
+      else
+      {
+        printf("%llu: ", m_test_values[i]);
+        for (int j = 0; j < m_num_terms[i]; j++)
+        {
+          printf("%llu ", m_terms[i][j]);
+        }
+        printf("\n");
+      }
     }
-    printf("%llu\n", test_value_sum);
-    // SetPart1Answer(test_value_sum);
+    printf("Reuslt = %llu\n", test_value_sum);
   }
 
 } // namespace YEAR_2024::DAY_7

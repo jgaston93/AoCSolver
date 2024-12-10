@@ -37,7 +37,7 @@ namespace YEAR_2024::DAY_9
 
       for (int i = 0; i < m_file_count; i++)
       {
-        printf("%llu: %llu %llu %llu\n", m_id[i], m_size[i], m_space[i], m_position[i]);
+        printf("%u: %u %u %u\n", m_id[i], m_size[i], m_space[i], m_position[i]);
       }
     }
   }

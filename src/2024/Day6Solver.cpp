@@ -79,25 +79,23 @@ namespace YEAR_2024::DAY_6
       {
         if (guard_visited[i][j])
         {
-          printf("X");
+          // printf("X");
           visit_count++;
-        }
-        else
-        {
-          printf("%c", m_map[i][j]);
-        }
 
-        if (m_map[i][j] == '.')
-        {
+          char tile = m_map[i][j];
           m_map[i][j] = '#';
           bool v[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
           Walk(start_x, start_y, start_direction, v, guard_exited, loop_found);
           if (loop_found)
             obstacle_count++;
-          m_map[i][j] = '.';
+          m_map[i][j] = tile;
+        }
+        else
+        {
+          // printf("%c", m_map[i][j]);
         }
       }
-      printf("\n");
+      // printf("\n");
     }
 
     SetPart1Answer(visit_count);
@@ -119,8 +117,12 @@ namespace YEAR_2024::DAY_6
       int next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
       int next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
 
-      if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
+      while (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
       {
+        if (directions[guard_y][guard_x][static_cast<int>(guard_direction)])
+          loop_found = true;
+        directions[guard_y][guard_x][static_cast<int>(guard_direction)] = true;
+
         guard_direction = static_cast<Direction>(static_cast<int>(guard_direction) + 1);
         if (guard_direction == Direction::NONE)
           guard_direction = Direction::UP;
@@ -128,11 +130,7 @@ namespace YEAR_2024::DAY_6
         next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
       }
 
-      if (directions[guard_y][guard_x][static_cast<int>(guard_direction)])
-        loop_found = true;
-
       visited[guard_y][guard_x] = true;
-      directions[guard_y][guard_x][static_cast<int>(guard_direction)] = true;
 
       guard_x = next_x;
       guard_y = next_y;

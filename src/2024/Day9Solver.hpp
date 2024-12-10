@@ -6,6 +6,7 @@
 namespace YEAR_2024::DAY_9
 {
   const int MAX_FILE_COUNT = 10000;
+  const int MAX_POSITION = 94638;
   struct Node
   {
     unsigned int file_id = 0;

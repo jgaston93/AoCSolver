@@ -52,50 +52,6 @@ namespace YEAR_2024::DAY_7
     return solution_found;
   }
 
-  uint64_t Evaluate(int num_terms, const uint64_t *terms, const Operator *operators)
-  {
-    uint64_t t[MAX_NUM_TERMS] = {0};
-    int num_t = 0;
-    int concat_count = 0;
-    for (int i = 0; i < num_terms - 1; i++)
-    {
-      if (operators[i] == Operator::CONCATENATION)
-      {
-        concat_count++;
-        uint64_t term = Concatenate(terms[i], terms[i + 1]);
-        t[num_t++] = term;
-        i++;
-      }
-      else
-      {
-        t[num_t++] = terms[i];
-      }
-    }
-
-    if (operators[num_terms - 2] != Operator::CONCATENATION)
-    {
-      t[num_t++] = terms[num_terms - 1];
-    }
-
-    uint64_t result = t[0];
-    int op_index = 0;
-    for (int i = 1; i < num_t; i++)
-    {
-      while (operators[op_index] == Operator::CONCATENATION)
-        op_index++;
-
-      if (operators[op_index] == Operator::ADDITION)
-      {
-        result += t[i];
-      }
-      else if (operators[op_index] == Operator::MULTIPLICATION)
-      {
-        result *= t[i];
-      }
-    }
-    return result;
-  }
-
   void Solver::Initialize(const char *input_filename)
   {
     FILE *fp = fopen(input_filename, "r");

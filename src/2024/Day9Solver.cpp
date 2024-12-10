@@ -107,11 +107,11 @@ namespace YEAR_2024::DAY_9
       for (int j = 0; j < m_size[i]; j++)
       {
         checksum += m_id[i] * (m_position[i] + j);
-        // printf("%u", m_id[i]);
+        printf("%u", m_id[i]);
       }
       for (int j = 0; j < m_space[i]; j++)
       {
-        // printf(".");
+        printf(".");
       }
     }
     printf("\nChecksum: %llu\n", checksum);

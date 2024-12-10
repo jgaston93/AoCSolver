@@ -7,14 +7,9 @@ namespace YEAR_2024::DAY_10
 {
   const int MAX_MAP_SIZE = 51;
   const int MAX_NUM_TRAILHEADS = 260;
-  struct Node
-  {
-    int height = 0;
-    int x = 0;
-    int y = 0;
-    int num_next_nodes = 0;
-    Node **next_nodes;
-  };
+
+  const int DIRECTIONS[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+  const char DIRECTION_CHAR[4] = {'^', '>', 'v', '<'};
 
   class Solver : public ISolver
   {
@@ -23,11 +18,13 @@ namespace YEAR_2024::DAY_10
     void Run() final;
 
   private:
+    void WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE]);
     int m_map_size = 0;
-    char m_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {0};
+    int m_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {0};
 
     int m_num_trailheads = 0;
-    Node *m_trailheads[MAX_NUM_TRAILHEADS];
+    int m_trailheads_x[MAX_NUM_TRAILHEADS] = {0};
+    int m_trailheads_y[MAX_NUM_TRAILHEADS] = {0};
   };
 } // namespace YEAR_2024::DAY_10
 

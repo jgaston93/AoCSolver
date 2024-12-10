@@ -23,7 +23,11 @@ namespace YEAR_2024::DAY_10
         {
           m_map_size = strlen(line);
         }
-        strcpy(m_map[counter++], line);
+        for (int i = 0; i < m_map_size; i++)
+        {
+          m_map[counter][i] = line[i] - '0';
+        }
+        counter++;
       }
       fclose(fp);
 
@@ -31,11 +35,10 @@ namespace YEAR_2024::DAY_10
       {
         for (int j = 0; j < m_map_size; j++)
         {
-          if (m_map[i][j] == '0')
+          if (m_map[i][j] == 0)
           {
-            m_trailheads[m_num_trailheads]->height = 0;
-            m_trailheads[m_num_trailheads]->x = j;
-            m_trailheads[m_num_trailheads]->y = i;
+            m_trailheads_x[m_num_trailheads] = j;
+            m_trailheads_y[m_num_trailheads] = i;
             m_num_trailheads++;
           }
         }
@@ -45,6 +48,60 @@ namespace YEAR_2024::DAY_10
 
   void Solver::Run()
   {
+    int trailhead_score_sum = 0;
+    for (int i = 0; i < m_num_trailheads; i++)
+    {
+      int trailhead_score = 0;
+      bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
+      char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE];
+      for (int j = 0; j < m_map_size; j++)
+      {
+        for (int k = 0; k < m_map_size; k++)
+        {
+          if (j == m_trailheads_y[i] && k == m_trailheads_x[i])
+            trail_map[j][k] = 'S';
+          else
+            trail_map[j][k] = '.';
+          destination_map[j][k] = false;
+        }
+      }
+      WalkTrails(m_trailheads_x[i], m_trailheads_y[i], destination_map, trail_map);
+      for (int j = 0; j < m_map_size; j++)
+      {
+        for (int k = 0; k < m_map_size; k++)
+        {
+          if (destination_map[j][k])
+            trailhead_score++;
+        }
+      }
+      trailhead_score_sum += trailhead_score;
+    }
+    SetPart1Answer(trailhead_score_sum);
+  }
+
+  void Solver::WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE])
+  {
+    for (int i = 0; i < 4; i++)
+    {
+      int next_x = x + DIRECTIONS[i][0];
+      int next_y = y + DIRECTIONS[i][1];
+      if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size)
+      {
+        if (m_map[next_y][next_x] == m_map[y][x] + 1)
+        {
+          if (m_map[next_y][next_x] == 9)
+          {
+            destination_map[next_y][next_x] = true;
+            trail_map[next_y][next_x] = 'X';
+          }
+          else
+          {
+            trail_map[next_y][next_x] = DIRECTION_CHAR[i];
+            WalkTrails(next_x, next_y, destination_map, trail_map);
+          }
+        }
+      }
+    }
   }
 
 } // namespace YEAR_2024::DAY_10

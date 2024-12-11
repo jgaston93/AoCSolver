@@ -49,9 +49,11 @@ namespace YEAR_2024::DAY_10
   void Solver::Run()
   {
     int trailhead_score_sum = 0;
+    int trailhead_rating_sum = 0;
     for (int i = 0; i < m_num_trailheads; i++)
     {
       int trailhead_score = 0;
+      int trailhead_rating = 0;
       bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {false};
       char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE];
       for (int j = 0; j < m_map_size; j++)
@@ -65,7 +67,7 @@ namespace YEAR_2024::DAY_10
           destination_map[j][k] = false;
         }
       }
-      WalkTrails(m_trailheads_x[i], m_trailheads_y[i], destination_map, trail_map);
+      trailhead_rating += WalkTrails(m_trailheads_x[i], m_trailheads_y[i], destination_map, trail_map);
       for (int j = 0; j < m_map_size; j++)
       {
         for (int k = 0; k < m_map_size; k++)
@@ -75,12 +77,15 @@ namespace YEAR_2024::DAY_10
         }
       }
       trailhead_score_sum += trailhead_score;
+      trailhead_rating_sum += trailhead_rating;
     }
     SetPart1Answer(trailhead_score_sum);
+    SetPart2Answer(trailhead_rating_sum);
   }
 
-  void Solver::WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE])
+  int Solver::WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE])
   {
+    int result = 0;
     for (int i = 0; i < 4; i++)
     {
       int next_x = x + DIRECTIONS[i][0];
@@ -93,15 +98,17 @@ namespace YEAR_2024::DAY_10
           {
             destination_map[next_y][next_x] = true;
             trail_map[next_y][next_x] = 'X';
+            result += 1;
           }
           else
           {
             trail_map[next_y][next_x] = DIRECTION_CHAR[i];
-            WalkTrails(next_x, next_y, destination_map, trail_map);
+            result += WalkTrails(next_x, next_y, destination_map, trail_map);
           }
         }
       }
     }
+    return result;
   }
 
 } // namespace YEAR_2024::DAY_10

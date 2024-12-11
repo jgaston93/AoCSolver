@@ -18,7 +18,7 @@ namespace YEAR_2024::DAY_10
     void Run() final;
 
   private:
-    void WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE]);
+    int WalkTrails(int x, int y, bool destination_map[MAX_MAP_SIZE][MAX_MAP_SIZE], char trail_map[MAX_MAP_SIZE][MAX_MAP_SIZE]);
     int m_map_size = 0;
     int m_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {0};
 

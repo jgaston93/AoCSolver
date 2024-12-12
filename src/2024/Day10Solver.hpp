@@ -8,9 +8,6 @@ namespace YEAR_2024::DAY_10
   const int MAX_MAP_SIZE = 51;
   const int MAX_NUM_TRAILHEADS = 260;
 
-  const int DIRECTIONS[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-  const char DIRECTION_CHAR[4] = {'^', '>', 'v', '<'};
-
   class Solver : public ISolver
   {
   public:

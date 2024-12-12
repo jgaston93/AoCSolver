@@ -9,6 +9,7 @@ add_library(AoC2024 Day1Solver.cpp
                      Day9Solver.cpp
                      Day10Solver.cpp
                      Day11Solver.cpp
+                     Day12Solver.cpp
                     )
 
 target_include_directories(AoC2024 PRIVATE ${CMAKE_SOURCE_DIR}/src)

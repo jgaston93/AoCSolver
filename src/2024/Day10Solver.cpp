@@ -88,8 +88,8 @@ namespace YEAR_2024::DAY_10
     int result = 0;
     for (int i = 0; i < 4; i++)
     {
-      int next_x = x + DIRECTIONS[i][0];
-      int next_y = y + DIRECTIONS[i][1];
+      int next_x = x + AOC_SOLVER_COMMON::DIRECTIONS[i][0];
+      int next_y = y + AOC_SOLVER_COMMON::DIRECTIONS[i][1];
       if (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size)
       {
         if (m_map[next_y][next_x] == m_map[y][x] + 1)
@@ -102,7 +102,7 @@ namespace YEAR_2024::DAY_10
           }
           else
           {
-            trail_map[next_y][next_x] = DIRECTION_CHAR[i];
+            trail_map[next_y][next_x] = AOC_SOLVER_COMMON::DIRECTION_CHAR[i];
             result += WalkTrails(next_x, next_y, destination_map, trail_map);
           }
         }

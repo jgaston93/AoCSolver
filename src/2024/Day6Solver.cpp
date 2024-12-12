@@ -1,13 +1,9 @@
 #include "Day6Solver.hpp"
 
-#include "AoCSolverCommon.hpp"
-
 #include <cstring>
 
 namespace YEAR_2024::DAY_6
 {
-  const int DIRECTIONS[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-
   void
   Solver::Initialize(const char *input_filename)
   {
@@ -34,31 +30,31 @@ namespace YEAR_2024::DAY_6
 
   void Solver::Run()
   {
-    Direction start_direction = Direction::NONE;
+    AOC_SOLVER_COMMON::Direction start_direction = AOC_SOLVER_COMMON::Direction::NONE;
     int start_x = 0;
     int start_y = 0;
-    for (int i = 0; i < m_map_size && start_direction == Direction::NONE; i++)
+    for (int i = 0; i < m_map_size && start_direction == AOC_SOLVER_COMMON::Direction::NONE; i++)
     {
-      for (int j = 0; j < m_map_size && start_direction == Direction::NONE; j++)
+      for (int j = 0; j < m_map_size && start_direction == AOC_SOLVER_COMMON::Direction::NONE; j++)
       {
         if (m_map[i][j] == '<')
         {
-          start_direction = Direction::LEFT;
+          start_direction = AOC_SOLVER_COMMON::Direction::LEFT;
         }
         else if (m_map[i][j] == '^')
         {
-          start_direction = Direction::UP;
+          start_direction = AOC_SOLVER_COMMON::Direction::UP;
         }
         else if (m_map[i][j] == '>')
         {
-          start_direction = Direction::RIGHT;
+          start_direction = AOC_SOLVER_COMMON::Direction::RIGHT;
         }
         else if (m_map[i][j] == 'v')
         {
-          start_direction = Direction::DOWN;
+          start_direction = AOC_SOLVER_COMMON::Direction::DOWN;
         }
 
-        if (start_direction != Direction::NONE)
+        if (start_direction != AOC_SOLVER_COMMON::Direction::NONE)
         {
           start_x = j;
           start_y = i;
@@ -102,11 +98,11 @@ namespace YEAR_2024::DAY_6
     SetPart2Answer(obstacle_count);
   }
 
-  void Solver::Walk(int start_x, int start_y, Direction start_direction, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool &guard_exited, bool &loop_found)
+  void Solver::Walk(int start_x, int start_y, AOC_SOLVER_COMMON::Direction start_direction, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool &guard_exited, bool &loop_found)
   {
     int guard_x = start_x;
     int guard_y = start_y;
-    Direction guard_direction = start_direction;
+    AOC_SOLVER_COMMON::Direction guard_direction = start_direction;
 
     bool directions[MAX_MAP_SIZE][MAX_MAP_SIZE][4] = {false};
 
@@ -114,8 +110,8 @@ namespace YEAR_2024::DAY_6
     loop_found = false;
     while (!guard_exited && !loop_found)
     {
-      int next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
-      int next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
+      int next_x = guard_x + AOC_SOLVER_COMMON::DIRECTIONS[static_cast<int>(guard_direction)][0];
+      int next_y = guard_y + AOC_SOLVER_COMMON::DIRECTIONS[static_cast<int>(guard_direction)][1];
 
       while (0 <= next_x && next_x < m_map_size && 0 <= next_y && next_y < m_map_size && m_map[next_y][next_x] == '#')
       {
@@ -123,11 +119,11 @@ namespace YEAR_2024::DAY_6
           loop_found = true;
         directions[guard_y][guard_x][static_cast<int>(guard_direction)] = true;
 
-        guard_direction = static_cast<Direction>(static_cast<int>(guard_direction) + 1);
-        if (guard_direction == Direction::NONE)
-          guard_direction = Direction::UP;
-        next_x = guard_x + DIRECTIONS[static_cast<int>(guard_direction)][0];
-        next_y = guard_y + DIRECTIONS[static_cast<int>(guard_direction)][1];
+        guard_direction = static_cast<AOC_SOLVER_COMMON::Direction>(static_cast<int>(guard_direction) + 1);
+        if (guard_direction == AOC_SOLVER_COMMON::Direction::NONE)
+          guard_direction = AOC_SOLVER_COMMON::Direction::UP;
+        next_x = guard_x + AOC_SOLVER_COMMON::DIRECTIONS[static_cast<int>(guard_direction)][0];
+        next_y = guard_y + AOC_SOLVER_COMMON::DIRECTIONS[static_cast<int>(guard_direction)][1];
       }
 
       visited[guard_y][guard_x] = true;

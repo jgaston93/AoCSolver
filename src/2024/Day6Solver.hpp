@@ -2,18 +2,10 @@
 #define YEAR_2024_DAY_6_SOLVER_HPP
 
 #include "ISolver.hpp"
+#include "AoCSolverCommon.hpp"
 
 namespace YEAR_2024::DAY_6
 {
-  enum class Direction
-  {
-    UP,
-    RIGHT,
-    DOWN,
-    LEFT,
-    NONE
-  };
-
   const int MAX_MAP_SIZE = 131;
   class Solver : public ISolver
   {
@@ -22,7 +14,7 @@ namespace YEAR_2024::DAY_6
     void Run() final;
 
   private:
-    void Walk(int start_x, int start_y, Direction start_direction, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool &guard_exited, bool &loop_found);
+    void Walk(int start_x, int start_y, AOC_SOLVER_COMMON::Direction start_direction, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool &guard_exited, bool &loop_found);
     int m_map_size = 0;
     char m_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {0};
   };

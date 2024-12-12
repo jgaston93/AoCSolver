@@ -34,14 +34,6 @@ namespace YEAR_2024::DAY_11
         tok = strtok(nullptr, " ");
       }
       fclose(fp);
-
-      Stone *stone_ptr = m_first_stone;
-      while (stone_ptr != nullptr)
-      {
-        printf("%llu ", stone_ptr->value);
-        stone_ptr = stone_ptr->next_stone;
-      }
-      printf("\n");
     }
   }
 
@@ -72,8 +64,6 @@ namespace YEAR_2024::DAY_11
             v_str[len / 2] = '\0';
             sscanf(v_str, "%llu", &a);
             Stone *remaining_stones = s->next_stone;
-            s->next_stone = new Stone();
-            s = s->next_stone;
             s->value = a;
             s->next_stone = new Stone();
             s = s->next_stone;

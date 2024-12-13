@@ -89,6 +89,14 @@ namespace YEAR_2024::DAY_11
       s = s->next_stone;
     }
     SetPart1Answer(stone_count_25);
+
+    Stone *s = m_first_stone;
+    while (s != nullptr)
+    {
+      Stone *previous_stone = s;
+      s = s->next_stone;
+      delete previous_stone;
+    }
   }
 
 } // namespace YEAR_2024::DAY_11

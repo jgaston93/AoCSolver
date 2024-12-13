@@ -90,7 +90,7 @@ namespace YEAR_2024::DAY_11
     }
     SetPart1Answer(stone_count_25);
 
-    Stone *s = m_first_stone;
+    s = m_first_stone;
     while (s != nullptr)
     {
       Stone *previous_stone = s;

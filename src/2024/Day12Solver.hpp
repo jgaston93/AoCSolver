@@ -21,7 +21,7 @@ namespace YEAR_2024::DAY_12
     void Run() final;
 
   private:
-    void Walk(int x, int y, int id, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2]);
+    void Walk(int x, int y, int id, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], int fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2]);
     int m_map_size = 0;
     Tile m_map[MAX_MAP_SIZE][MAX_MAP_SIZE] = {0};
     int m_next_tile_id = 0;

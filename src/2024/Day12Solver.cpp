@@ -44,7 +44,7 @@ namespace YEAR_2024::DAY_12
       {
         if (!visited[i][j])
         {
-          bool fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2] = {false};
+          int fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2] = {0};
           m_types[m_next_tile_id] = m_map[i][j].type;
           Walk(j, i, m_next_tile_id, visited, fence);
 
@@ -52,29 +52,22 @@ namespace YEAR_2024::DAY_12
           {
             for (int x = 0; x < m_map_size + 2; x++)
             {
-              if (fence[y][x])
-              {
-                printf("X");
-                m_perimeters[m_next_tile_id]++;
-              }
-              else
-              {
-                printf(".");
-              }
+              m_perimeters[m_next_tile_id] += fence[y][x];
             }
-            printf("\n");
           }
           m_next_tile_id++;
         }
       }
     }
+    int price = 0;
     for (int i = 0; i < m_next_tile_id; i++)
     {
-      printf("%c: %d %d\n", m_types[i], m_areas[i], m_perimeters[i]);
+      price += m_perimeters[i] * m_areas[i];
     }
+    SetPart1Answer(price);
   }
 
-  void Solver::Walk(int x, int y, int id, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], bool fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2])
+  void Solver::Walk(int x, int y, int id, bool visited[MAX_MAP_SIZE][MAX_MAP_SIZE], int fence[MAX_MAP_SIZE + 2][MAX_MAP_SIZE + 2])
   {
     m_map[y][x].id = id;
     visited[y][x] = true;
@@ -93,12 +86,12 @@ namespace YEAR_2024::DAY_12
         }
         else if (m_map[next_y][next_x].type != m_map[y][x].type)
         {
-          fence[next_y + 1][next_x + 1] = true;
+          fence[next_y + 1][next_x + 1]++;
         }
       }
       else
       {
-        fence[next_y + 1][next_x + 1] = true;
+        fence[next_y + 1][next_x + 1]++;
       }
     }
   }

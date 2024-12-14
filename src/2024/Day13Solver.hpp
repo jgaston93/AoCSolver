@@ -13,8 +13,6 @@ namespace YEAR_2024::DAY_13
     void Run() final;
 
   private:
-    void Press(int x, int y, int num_a_presses, int num_b_presses, int machine_num);
-
     int m_num_machines = 0;
     int m_a_x[MAX_NUM_MACHNES] = {0};
     int m_a_y[MAX_NUM_MACHNES] = {0};

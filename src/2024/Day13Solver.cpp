@@ -2,6 +2,8 @@
 
 #include "AoCSolverCommon.hpp"
 
+#include <queue>
+
 namespace YEAR_2024::DAY_13
 {
 
@@ -40,44 +42,25 @@ namespace YEAR_2024::DAY_13
 
   void Solver::Run()
   {
-    for (int i = 0; i < m_num_machines; i++)
+    int num_tokens = 0;
+    for (int machine_num = 0; machine_num < m_num_machines; machine_num++)
     {
-      Press(0, 0, 0, 0, i);
-    }
-  }
-
-  void Solver::Press(int x, int y, int num_a_presses, int num_b_presses, int machine_num)
-  {
-    if (x == m_prize_x[machine_num] && y == m_prize_y[machine_num])
-    {
-      printf("[%d] Prize Found: %d %d\n", machine_num, num_a_presses, num_b_presses);
-    }
-    else
-    {
-      int next_a_x = x + m_a_x[machine_num];
-      int next_a_y = y + m_a_y[machine_num];
-      if (next_a_x < m_prize_x[machine_num] && next_a_y < m_prize_y[machine_num] && num_a_presses < 100)
+      bool solution_found = false;
+      for (int i = 0; i < 100 && !solution_found; i++)
       {
-        Press(next_a_x, next_a_y, num_a_presses + 1, num_b_presses, machine_num);
+        for (int j = 0; j < 100 && !solution_found; j++)
+        {
+          int x = (m_a_x[machine_num] * i) + (m_b_x[machine_num] * j);
+          int y = (m_a_y[machine_num] * i) + (m_b_y[machine_num] * j);
+          if (x == m_prize_x[machine_num] && y == m_prize_y[machine_num])
+          {
+            solution_found = true;
+            num_tokens += (i * 3) + j;
+          }
+        }
       }
-      // else
-      // {
-      //   printf("No Path Found: num presses %d %d\n", num_a_presses, num_b_presses);
-      //   printf("%d %d != %d %d\n", next_a_x, next_a_y, m_prize_x[machine_num], m_prize_y[machine_num]);
-      // }
-
-      int next_b_x = x + m_b_x[machine_num];
-      int next_b_y = y + m_b_y[machine_num];
-      if (next_b_x < m_prize_x[machine_num] && next_b_y < m_prize_y[machine_num] && num_b_presses < 100)
-      {
-        Press(next_b_x, next_b_y, num_a_presses, num_b_presses + 1, machine_num);
-      }
-      // else
-      // {
-      //   printf("No Path Found: num presses %d %d\n", num_a_presses, num_b_presses);
-      //   printf("%d %d != %d %d\n", next_a_x, next_a_y, m_prize_x[machine_num], m_prize_y[machine_num]);
-      // }
     }
+    SetPart1Answer(num_tokens);
   }
 
 } // namespace YEAR_2024::DAY_13

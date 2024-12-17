@@ -103,6 +103,49 @@ namespace YEAR_2024::DAY_15
 
     for (int i = 0; i < m_num_directions; i++)
     {
+      AOC_SOLVER_COMMON::Direction d = m_directions[i];
+
+      int direction_index = 0;
+
+      switch (d)
+      {
+      case AOC_SOLVER_COMMON::Direction::UP:
+        direction_index = 0;
+        break;
+      case AOC_SOLVER_COMMON::Direction::RIGHT:
+        direction_index = 1;
+        break;
+      case AOC_SOLVER_COMMON::Direction::DOWN:
+        direction_index = 2;
+        break;
+      case AOC_SOLVER_COMMON::Direction::LEFT:
+        direction_index = 3;
+        break;
+      }
+
+      int vx = AOC_SOLVER_COMMON::DIRECTIONS[direction_index][0];
+      int vy = AOC_SOLVER_COMMON::DIRECTIONS[direction_index][1];
+
+      int next_x = x + vx;
+      int next_y = y + vy;
+
+      while (m_map[next_y][next_x] != TileType::SPACE && m_map[next_y][next_x] != TileType::OBSTACLE)
+      {
+        next_x = x + vx;
+        next_y = y + vy;
+      }
+
+      if (m_map[next_y][next_x] == TileType::SPACE)
+      {
+        while (m_map[next_y][next_x] != TileType::ROBOT)
+        {
+          TileType t = m_map[next_y][next_x];
+          m_map[next_y][next_x] = m_map[next_y - vy][next_x - vx];
+          m_map[next_y - vy][next_x - vx] = t;
+          next_x = next_x - vx;
+          next_y = next_y - vy;
+        }
+      }
     }
   }
 

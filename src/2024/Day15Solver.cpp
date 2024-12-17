@@ -131,13 +131,13 @@ namespace YEAR_2024::DAY_15
 
       while (m_map[next_y][next_x] != TileType::SPACE && m_map[next_y][next_x] != TileType::OBSTACLE)
       {
-        next_x = x + vx;
-        next_y = y + vy;
+        next_x += vx;
+        next_y += vy;
       }
 
       if (m_map[next_y][next_x] == TileType::SPACE)
       {
-        while (m_map[next_y][next_x] != TileType::ROBOT)
+        while (!(next_x == x && next_y == y))
         {
           TileType t = m_map[next_y][next_x];
           m_map[next_y][next_x] = m_map[next_y - vy][next_x - vx];
@@ -145,7 +145,52 @@ namespace YEAR_2024::DAY_15
           next_x = next_x - vx;
           next_y = next_y - vy;
         }
+        x += vx;
+        y += vy;
       }
+    }
+    PrintMap();
+
+    int gps_sum = 0;
+    for (int i = 0; i < m_map_size; i++)
+    {
+      for (int j = 0; j < m_map_size; j++)
+      {
+        if (m_map[i][j] == TileType::BOX)
+        {
+          gps_sum += 100 * i + j;
+        }
+      }
+    }
+    SetPart1Answer(gps_sum);
+  }
+
+  void Solver::PrintMap()
+  {
+    for (int i = 0; i < m_map_size; i++)
+    {
+      for (int j = 0; j < m_map_size; j++)
+      {
+        char c = ' ';
+        switch (m_map[i][j])
+        {
+        case TileType::SPACE:
+          c = '.';
+          break;
+        case TileType::OBSTACLE:
+          c = '#';
+          break;
+        case TileType::BOX:
+          c = 'O';
+          break;
+        case TileType::ROBOT:
+          c = '@';
+          break;
+        }
+
+        printf("%c", c);
+      }
+      printf("\n");
     }
   }
 

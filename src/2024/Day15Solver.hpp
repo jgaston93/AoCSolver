@@ -26,6 +26,7 @@ namespace YEAR_2024::DAY_15
     void Run() final;
 
   private:
+    void PrintMap();
     int m_map_size = 0;
     TileType m_map[MAX_MAP_SIZE][MAX_MAP_SIZE];
 

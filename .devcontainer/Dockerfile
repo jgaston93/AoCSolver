@@ -1,4 +1,4 @@
-FROM ubuntu:24.10
+FROM ubuntu:latest
 RUN apt-get update \
   && apt-get -y install build-essential clang-format cmake gdb git  \
   && apt-get clean \
@@ -6,13 +6,10 @@ RUN apt-get update \
   && git clone https://github.com/jarro2783/cxxopts.git /usr/src/cxxopts
 WORKDIR /usr/src/json
 RUN cmake -B build -S ./ \
-  && cmake --build build --target install
+  && cmake --build build --target install --parallel 4
 WORKDIR /usr/src/cxxopts
 RUN cmake -B build -S ./ \
-  && cmake --build build --target install
+  && cmake --build build --target install --parallel 4
 
-WORKDIR /usr/src/app
-RUN git clone https://github.com/jgaston93/AoCSolver.git \
-  && useradd -m user \
-  && chown -R user ./
-USER user
+ENTRYPOINT [ "/bin/bash", "-c" ]
+CMD ["tail", "-f", "/dev/null"]

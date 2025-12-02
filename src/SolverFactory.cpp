@@ -121,6 +121,18 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     }
     break;
   }
+  case 2025:
+  {
+    if (strcmp(day, "Day1") == 0)
+    {
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2025::DAY_1::Solver>());
+    }
+    else
+    {
+      printf("Invalid Class Name\n");
+    }
+    break;
+  }
   default:
   {
     printf("Invalid Year\n");

@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "day": "Day1Solver",
+  "day": "Day1",
   "input_file": "configuration/2025/day1/input_file.txt",
   "sample_input_file": "configuration/2025/day1/sample_input_file.txt"
 }

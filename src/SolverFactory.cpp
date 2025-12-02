@@ -21,6 +21,9 @@
 #include "2024/Day15Solver.hpp"
 #include "2024/Day16Solver.hpp"
 
+#include "2025/Day1Solver.hpp"
+#include "2025/Day2Solver.hpp"
+
 #include <string.h>
 #include <cstdio>
 
@@ -45,7 +48,7 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     }
     else
     {
-      printf("Invalid Class Name\n");
+      printf("2021: Invalid Class Name %s\n", day);
     }
     break;
   }
@@ -117,7 +120,7 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     }
     else
     {
-      printf("Invalid Class Name\n");
+      printf("2024: Invalid Class Name %s\n", day);
     }
     break;
   }
@@ -127,15 +130,19 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2025::DAY_1::Solver>());
     }
+    if (strcmp(day, "Day2") == 0)
+    {
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2025::DAY_2::Solver>());
+    }
     else
     {
-      printf("Invalid Class Name\n");
+      printf("2025: Invalid Class Name %s\n", day);
     }
     break;
   }
   default:
   {
-    printf("Invalid Year\n");
+    printf("Invalid Year %d\n", year);
   }
   }
 

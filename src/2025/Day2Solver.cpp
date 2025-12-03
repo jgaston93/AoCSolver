@@ -5,6 +5,22 @@
 #include <cstdlib>
 #include <string.h>
 
+void reverse_str(char *str)
+{
+  int start = 0;
+  int end = strlen(str) - 1;
+
+  while (start < end)
+  {
+    char temp = str[end];
+    str[end] = str[start];
+    str[start] = temp;
+
+    start++;
+    end--;
+  }
+}
+
 namespace YEAR_2025::DAY_2
 {
   Solver::Solver() : num_ranges(0)
@@ -30,6 +46,8 @@ namespace YEAR_2025::DAY_2
       {
         ProductIDRange range;
         strcpy(range.start, token);
+        reverse_str(range.start);
+
         int range_start = atoi(token);
 
         token = strtok(NULL, ",");
@@ -47,43 +65,95 @@ namespace YEAR_2025::DAY_2
 
   void Solver::Run()
   {
-    int part1_answer = 0;
-    int part2_answer = 0;
+    unsigned long long int part1_answer = 0;
+    unsigned long long int part2_answer = 0;
 
     for (int range_index = 0; range_index < num_ranges; range_index++)
     {
-      for (int range_count = 0; range_count < ranges[range_index].length; range_count++)
-      { // printf("%s\n", ranges[range_index].start);
-        int str_len = strlen(ranges[range_index].start);
-        for (int sub_str_len = 1; sub_str_len <= (str_len / 2); sub_str_len++)
+      for (int range_count = 0; range_count < ranges[range_index].length + 1; range_count++)
+      {
+        // Part 1
         {
-          char sub_str[12];
-          strcpy(sub_str, ranges[range_index].start);
-          sub_str[sub_str_len] = '\0';
-          // printf("%s\n", sub_str);
-
-          int idx = sub_str_len;
-          bool is_equal = true;
-          while (idx < str_len && is_equal)
+          int str_len = strlen(ranges[range_index].start);
+          if (str_len % 2 == 0)
           {
-            // printf("Comparing: '%s' and '%s'\n", sub_str, ranges[range_index].start + idx);
-            if (strncmp(sub_str, ranges[range_index].start + idx, sub_str_len) != 0)
+            int sub_str_len = str_len / 2;
+            char sub_str[MAX_NUM_CHARACTERS];
+            strncpy(sub_str, ranges[range_index].start, sub_str_len);
+            sub_str[sub_str_len] = '\0';
+            if (strcmp(sub_str, &ranges[range_index].start[sub_str_len]) == 0)
             {
-              is_equal = false;
+              char str[MAX_NUM_CHARACTERS];
+              strcpy(str, ranges[range_index].start);
+              reverse_str(str);
+              unsigned long long int value = std::strtoull(str, NULL, 10);
+              part1_answer += value;
             }
-            idx += sub_str_len;
-          }
-
-          if (is_equal)
-          {
-            part1_answer++;
           }
         }
-        // printf("\n");
+        // Part 2
+        {
+          bool pattern_found = false;
+          int str_len = strlen(ranges[range_index].start);
+          for (int sub_str_len = 1; sub_str_len <= (str_len / 2) && !pattern_found; sub_str_len++)
+          {
+            char sub_str[MAX_NUM_CHARACTERS];
+            strcpy(sub_str, ranges[range_index].start);
+            sub_str[sub_str_len] = '\0';
+
+            int idx = sub_str_len;
+            bool is_equal = true;
+            while (idx < str_len && is_equal)
+            {
+              if (strncmp(sub_str, ranges[range_index].start + idx, sub_str_len) != 0)
+              {
+                is_equal = false;
+              }
+              idx += sub_str_len;
+            }
+
+            if (is_equal)
+            {
+              char str[MAX_NUM_CHARACTERS];
+              strcpy(str, ranges[range_index].start);
+              reverse_str(str);
+              unsigned long long int value = std::strtoull(str, NULL, 10);
+              part2_answer += value;
+              pattern_found = true;
+            }
+          }
+        }
+
+        int carry_over = 1;
+        int index = 0;
+        while (carry_over > 0)
+        {
+          ranges[range_index].start[index]++;
+          carry_over = 0;
+          if (ranges[range_index].start[index] > '9')
+          {
+            ranges[range_index].start[index] = '0';
+            index++;
+            carry_over = 1;
+          }
+
+          if (carry_over > 0 && ranges[range_index].start[index] == '\0')
+          {
+            ranges[range_index].start[index] = '0';
+            ranges[range_index].start[index + 1] = '\0';
+          }
+        }
       }
     }
 
+    printf("part1_answer=%llu\n", part1_answer);
+    printf("part2_answer=%llu\n", part2_answer);
+
     SetPart1Answer(part1_answer);
     SetPart2Answer(part2_answer);
+  }
+
+  void Solver::PrintAnswer() const
+  {
   }
 } // namespace YEAR_2024::DAY_2

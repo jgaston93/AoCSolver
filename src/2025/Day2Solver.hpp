@@ -9,10 +9,11 @@
 
 namespace YEAR_2025::DAY_2
 {
+  const int MAX_NUM_CHARACTERS = 21;
   const int MAX_NUM_RANGES = 40;
   struct ProductIDRange
   {
-    char start[12];
+    char start[MAX_NUM_CHARACTERS];
     int length;
 
     ProductIDRange() : length(0)
@@ -27,6 +28,7 @@ namespace YEAR_2025::DAY_2
     Solver();
     void Initialize(const char *input_filename) final;
     void Run() final;
+    void PrintAnswer() const final;
 
   private:
     ProductIDRange ranges[MAX_NUM_RANGES];

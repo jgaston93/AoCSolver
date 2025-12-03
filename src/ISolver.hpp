@@ -10,7 +10,7 @@ public:
   virtual void Initialize(const char *input_filename) = 0;
   virtual void Run() = 0;
 
-  void PrintAnswer() const
+  virtual void PrintAnswer() const
   {
     printf("Part 1 = %d\n", m_part1_answer);
     printf("Part 2 = %d\n", m_part2_answer);

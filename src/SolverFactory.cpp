@@ -23,6 +23,7 @@
 
 #include "2025/Day1Solver.hpp"
 #include "2025/Day2Solver.hpp"
+#include "2025/Day3Solver.hpp"
 
 #include <string.h>
 #include <cstdio>
@@ -133,6 +134,10 @@ std::shared_ptr<ISolver> SolverFactory::createSolver(int year, const char *day)
     if (strcmp(day, "Day2") == 0)
     {
       solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2025::DAY_2::Solver>());
+    }
+    if (strcmp(day, "Day3") == 0)
+    {
+      solver = std::shared_ptr<ISolver>(std::make_shared<YEAR_2025::DAY_3::Solver>());
     }
     else
     {

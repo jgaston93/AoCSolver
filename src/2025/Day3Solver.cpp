@@ -48,14 +48,38 @@ bool isMaskValid(char *mask, int count)
 {
   int c = 0;
   int len = strlen(mask);
-  for (int i = 0; i <= len; i++)
+  bool valid = true;
+  for (int i = 0; i <= len && valid; i++)
   {
     if (mask[i] == '1')
     {
       c++;
     }
+
+    if (c > count)
+    {
+      valid = false;
+    }
   }
-  return c == count;
+  valid = c == count;
+  return valid;
+}
+
+YEAR_2025::DAY_3::Joltage getJoltage(char *batter_bank, char *mask)
+{
+  char joltage_str[13];
+  int idx = 0;
+  int len = strlen(batter_bank);
+  for (int i = 0; i < len; i++)
+  {
+    if (mask[i] == '1')
+    {
+      joltage_str[idx++] = batter_bank[i];
+    }
+  }
+
+  YEAR_2025::DAY_3::Joltage joltage = std::strtoull(joltage_str, NULL, 10);
+  return joltage;
 }
 
 namespace YEAR_2025::DAY_3
@@ -90,12 +114,19 @@ namespace YEAR_2025::DAY_3
 
   void Solver::Run()
   {
-    unsigned long long int part1_answer = 0;
-    unsigned long long int part2_answer = 0;
+    Joltage part1_answer;
+    Joltage part2_answer;
 
     for (int bank_index = 0; bank_index < m_num_banks; bank_index++)
     {
-      int max_joltage = 0;
+      Joltage max_joltage = 0;
+
+      int num_batteries = 2;
+      int batt_indices[MAX_COL];
+      for (int i = num_batteries - 1; i >= 0; i++)
+      {
+        batt_indices[i] = i;
+      }
 
       char mask[MAX_COL];
       memset(mask, '0', m_bank_size);
@@ -106,9 +137,16 @@ namespace YEAR_2025::DAY_3
         if (isMaskValid(mask, 2))
         {
           printf("%s\n", mask);
+          Joltage joltage = getJoltage(m_battery_banks[bank_index], mask);
+          if (joltage > max_joltage)
+          {
+            max_joltage = joltage;
+          }
         }
         incrementMask(mask);
       }
+
+      part1_answer += max_joltage;
 
       //   for (int batt_1 = 0; batt_1 < m_bank_size - 1; batt_1++)
       //   {
@@ -129,7 +167,7 @@ namespace YEAR_2025::DAY_3
       //   part1_answer += max_joltage;
     }
 
-    // printf("part1_answer=%llu\n", part1_answer);
+    printf("part1_answer=%llu\n", part1_answer);
 
     SetPart1Answer(part1_answer);
     SetPart2Answer(part2_answer);

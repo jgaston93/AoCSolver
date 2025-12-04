@@ -7,6 +7,7 @@
 
 namespace YEAR_2025::DAY_3
 {
+  typedef unsigned long long int Joltage;
   const int MAX_COL = 101;
   const int MAX_ROW = 200;
   class Solver : public ISolver

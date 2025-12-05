@@ -35,56 +35,69 @@ namespace YEAR_2025::DAY_4
 
   void Solver::Run()
   {
-    unsigned long long int part1_answer;
-    unsigned long long int part2_answer;
+    unsigned long long int part1_answer = 0;
+    unsigned long long int part2_answer = 0;
 
-    for (int y = 0; y < m_size_y; y++)
+    unsigned long long int rolls_removed = 0;
+    unsigned long long int previous_rolls_removed = 0;
+    bool removed_rolls = true;
+    while (removed_rolls)
     {
-      for (int x = 0; x < m_size_x; x++)
+      for (int y = 0; y < m_size_y; y++)
       {
-        if (m_grid[y][x] == '@' || m_grid[y][x] == 'x')
+        for (int x = 0; x < m_size_x; x++)
         {
-          int y_1 = y - 1;
-          int y_2 = y + 1;
-          int x_1 = x - 1;
-          int x_2 = x + 1;
+          if (m_grid[y][x] == '@')
+          {
+            int y_1 = y - 1;
+            int y_2 = y + 1;
+            int x_1 = x - 1;
+            int x_2 = x + 1;
 
-          if (y_1 < 0)
-          {
-            y_1 = 0;
-          }
-          if (y_2 > m_size_y - 1)
-          {
-            y_2 = m_size_y - 1;
-          }
-          if (x_1 < 0)
-          {
-            x_1 = 0;
-          }
-          if (x_1 > m_size_x - 1)
-          {
-            x_1 = m_size_x - 1;
-          }
-
-          int roll_count = 0;
-
-          for (int i = y_1; i <= y_2; i++)
-          {
-            for (int j = x_1; j <= x_2; j++)
+            if (y_1 < 0)
             {
-              if (!(i == y && j == x) && (m_grid[i][j] == '@' || m_grid[i][j] == 'x'))
+              y_1 = 0;
+            }
+            if (y_2 > m_size_y - 1)
+            {
+              y_2 = m_size_y - 1;
+            }
+            if (x_1 < 0)
+            {
+              x_1 = 0;
+            }
+            if (x_2 > m_size_x - 1)
+            {
+              x_2 = m_size_x - 1;
+            }
+
+            int roll_count = 0;
+
+            for (int i = y_1; i <= y_2; i++)
+            {
+              for (int j = x_1; j <= x_2; j++)
               {
-                roll_count++;
+                if (!(i == y && j == x) && m_grid[i][j] == '@')
+                {
+                  roll_count++;
+                }
               }
             }
-          }
-          if (roll_count < 4)
-          {
-            part1_answer++;
-            m_grid[y][x] = 'x';
+            if (roll_count < 4)
+            {
+              part1_answer++;
+              m_grid[y][x] = '.';
+              rolls_removed++;
+            }
           }
         }
       }
+
+      if (rolls_removed == previous_rolls_removed)
+      {
+        removed_rolls = false;
+      }
+      previous_rolls_removed = rolls_removed;
     }
 
     for (int y = 0; y < m_size_y; y++)
